@@ -74,11 +74,7 @@
 <body>
   <div class="container">
     <div class="note">
-      This Home Loan Calculator is made especially for the followers of <strong>Alfred Phua</strong> at <strong>mykchhome</strong> for the ease of calculating their estimated monthly installment for the home loans they intended to take.
-    </div>
-
-    <div class="note">
-      Feel free to contact <strong>Alfred Phua</strong> at <strong>012-8877826</strong> to buy or market your property.
+      This Home Loan Calculator is made especially for the followers of <strong>Alfred Phua</strong> at <strong>mykchhome</strong> for the ease of calculating their estimated monthly installment for the home loans they intended to take. Feel free to contact <strong>Alfred Phua</strong> at <strong>012-8877826</strong> to buy or market your property.
     </div>
 
     <div class="note">
@@ -97,57 +93,4 @@
 
     <button onclick="calculateLoan()">Calculate</button>
 
-    <div class="results" id="results"></div>
-    <div class="results" id="schedule"></div>
-  </div>
-
-  <script>
-    function calculateLoan() {
-      const amount = parseFloat(document.getElementById('amount').value);
-      const interest = parseFloat(document.getElementById('interest').value) / 100 / 12;
-      const years = parseFloat(document.getElementById('years').value);
-      const months = years * 12;
-
-      const x = Math.pow(1 + interest, months);
-      const monthly = (amount * interest * x) / (x - 1);
-
-      if (!isFinite(monthly)) {
-        document.getElementById('results').innerHTML = `<p style='color: red;'>Please enter valid numbers.</p>`;
-        document.getElementById('schedule').innerHTML = "";
-        return;
-      }
-
-      const totalRepayment = monthly * months;
-      const totalInterest = totalRepayment - amount;
-
-      document.getElementById('results').innerHTML = `
-        <p><strong>Monthly Repayment:</strong> RM ${monthly.toFixed(2)}</p>
-        <p><strong>Total Repayment:</strong> RM ${totalRepayment.toFixed(2)}</p>
-        <p><strong>Total Interest:</strong> RM ${totalInterest.toFixed(2)}</p>
-      `;
-
-      // Generate amortization schedule
-      let balance = amount;
-      let schedule = `<h3>Amortization Schedule</h3>
-      <table>
-        <tr><th>Month</th><th>Principal (RM)</th><th>Interest (RM)</th><th>Balance (RM)</th></tr>`;
-
-      for (let i = 1; i <= months; i++) {
-        const monthlyInterest = balance * interest;
-        const monthlyPrincipal = monthly - monthlyInterest;
-        balance -= monthlyPrincipal;
-
-        schedule += `<tr>
-          <td>${i}</td>
-          <td>${monthlyPrincipal.toFixed(2)}</td>
-          <td>${monthlyInterest.toFixed(2)}</td>
-          <td>${Math.max(balance, 0).toFixed(2)}</td>
-        </tr>`;
-      }
-      schedule += '</table>';
-
-      document.getElementById('schedule').innerHTML = schedule;
-    }
-  </script>
-</body>
-</html>
+    <div class="results" id=
